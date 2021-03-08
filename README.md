@@ -14,3 +14,4 @@ Multimea elementelor salvate se imparte in urmatoarele categorii:
 2. Formula matematica
 3. URL
 4. Checklist
+5. Contacte
