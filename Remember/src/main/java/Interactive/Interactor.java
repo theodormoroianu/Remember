@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import Storage.StorageItem;
 import Worker.InputWorker;
+import Worker.StringWorker;
+import java.util.Arrays;
 
 public class Interactor {
     
@@ -48,23 +50,26 @@ public class Interactor {
         if (args.length == 0)
             return false;
 
-        boolean command_valid = true;
+        StringWorker stringworker = StringWorker.GetInstance();
 
-        if (args.length == 1) {
-            args[0] = args[0].toLowerCase();
-            switch(args[0]) {
-                case "exit":
-                    return true;
-                case "help":
-                    DisplayHelp();
-                    break;
-                default:
-                    command_valid = false;
+        args[0] = args[0].toLowerCase();
+
+        switch(args[0]) {
+            case "exit":
+                return true;
+            case "help":
+                DisplayHelp();
+                return false;
+        }
+
+        for (StorageItem storage : storages) {
+            if (stringworker.CheckEqual(storage.Name(), args[0])) {
+                storage.Execute(Arrays.copyOfRange(args, 1, args.length));
+                return false;
             }
         }
 
-        if (!command_valid)
-            out.println("ERROR: Command was not understood.\nPlease use \"Help\" for a list of available commands.");
+        out.println("ERROR: Command was not understood.\nPlease use \"Help\" for a list of available commands.");
         return false;
     }
 

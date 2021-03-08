@@ -27,7 +27,7 @@ public interface StorageItem {
      * Executes a list of commands received from the command line.
      * @param arguments given by the command line.
      */
-    public void Execute(ArrayList <String> args);
+    public void Execute(String[] args);
 
     /**
      * Returns the name of the component.

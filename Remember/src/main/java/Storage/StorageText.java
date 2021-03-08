@@ -2,6 +2,8 @@ package Storage;
 
 import java.util.ArrayList;
 
+import Worker.StringWorker;
+
 class TextContent {
     private String title;
     private String content;
@@ -48,14 +50,16 @@ public class StorageText implements StorageItem {
         throw new Error("Feature not implemented!");
     }
 
-    public void Execute(ArrayList <String> args) {
+    public void Execute(String[] args) {
+        StringWorker stringworker = StringWorker.GetInstance();
+
         try {
             // If args == {} then exit.
-            if (args.size() == 0)
+            if (args.length == 0)
                 throw new Exception();
-            if (args.size() == 1) {
-                String s = args.get(0);
-                if (!s.equals("list"))
+            if (args.length == 1) {
+                String s = args[0];
+                if (!stringworker.CheckEqual(args[0], "list"))
                     throw new Exception();
                 System.out.println("Saved notes:\n");
                 for (int i = 0; i < content.size(); i++)
@@ -63,7 +67,7 @@ public class StorageText implements StorageItem {
             }
             
         } catch(Exception e) {
-            System.out.println("Usage: [View / Edit / Delete] <Title>\n    List");
+            System.out.println("Usage: " + Name() + " [View / Edit / Delete] <Title>\n    List");
         }
     }
 }
