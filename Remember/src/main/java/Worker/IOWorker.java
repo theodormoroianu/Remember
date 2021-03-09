@@ -1,19 +1,19 @@
 package Worker;
 import java.util.Scanner;
 
-public class InputWorker {
+public class IOWorker {
     
     private Scanner fin;
     
-    private InputWorker() {
+    private IOWorker() {
         fin = new Scanner(System.in);
     }
 
-    private static InputWorker instance = null;
+    private static IOWorker instance = null;
 
-    public static InputWorker GetInstance() {
+    public static IOWorker GetInstance() {
         if (instance == null)
-            instance = new InputWorker();
+            instance = new IOWorker();
         return instance;
     }
 
@@ -27,5 +27,10 @@ public class InputWorker {
 
     public String[] GetWords() {
         return fin.nextLine().split(" ");
+    }
+
+    public void ClearConsole() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
     }
 }

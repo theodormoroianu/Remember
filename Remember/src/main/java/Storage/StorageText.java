@@ -34,6 +34,10 @@ public class StorageText implements StorageItem {
     
     private ArrayList <TextContent> content;
     
+    public StorageText() {
+        content = new ArrayList <> ();
+    }
+
     public String Name() {
         return "Text";
     }

@@ -7,8 +7,7 @@ import Storage.StorageText;
 import java.util.ArrayList;
 
 /**
- * Hello world!
- *
+ * Entry point of the Remember app.
  */
 public class App 
 {

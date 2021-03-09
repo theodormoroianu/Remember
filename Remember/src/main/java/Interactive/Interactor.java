@@ -3,7 +3,7 @@ package Interactive;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import Storage.StorageItem;
-import Worker.InputWorker;
+import Worker.IOWorker;
 import Worker.StringWorker;
 import java.util.Arrays;
 
@@ -36,6 +36,7 @@ public class Interactor {
         out.println("\nAvailable commands:");
         out.println("    * Exit               Exists Rɘmɘmbɘr.");
         out.println("    * Help               Displays this message.");
+        out.println("    * Clear               Clears the console.");
         out.println("\nAvailable modules:");
         for (StorageItem comp : storages)
             out.println(("    * " + comp.Name() + "                          ").substring(0, 25) + comp.Description());
@@ -60,6 +61,9 @@ public class Interactor {
             case "help":
                 DisplayHelp();
                 return false;
+            case "clear":
+                IOWorker.GetInstance().ClearConsole();
+                return false;
         }
 
         for (StorageItem storage : storages) {
@@ -82,7 +86,7 @@ public class Interactor {
         out.println("Rɘmɘmbɘr 0.0.1 (8 March 2021)");
         out.println("Type \"credits\" or \"help\" for more info.");
 
-        InputWorker input = InputWorker.GetInstance();
+        IOWorker input = IOWorker.GetInstance();
         
         while (true) {
             out.print(" $ ");
