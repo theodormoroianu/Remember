@@ -2,11 +2,39 @@ package Storage;
 
 import java.util.ArrayList;
 
-import Worker.StringWorker;
+import Worker.IOWorker;
 
-class TextContent {
+class TextContent implements StorageEntry {
     private String title;
     private String content;
+
+    public TextContent() { }
+
+    public void Edit() {
+        System.out.println("Former title: " + title);
+        System.out.println("New title (leave blank to not modify): ");
+        String new_title = IOWorker.GetInstance().GetLine();
+        if (!new_title.isEmpty())
+            title = new_title; // TODO: not be able to have same title twice
+        System.out.println("Former content: " + content);
+        System.out.println("New content (leave blank to not modify): ");
+        String new_content = IOWorker.GetInstance().GetLine();
+        if (!new_content.isEmpty())
+            content = new_content;
+    }
+
+    public void New() {
+        System.out.print("Title: ");
+        title = IOWorker.GetInstance().GetLine();
+        System.out.print("Content: ");
+        content = IOWorker.GetInstance().GetLine();
+    }
+
+    public void Show() {
+        System.out.println("Title: " + title);
+        System.out.println("Content: " + content);
+    }
+
 
     TextContent(String title, String content) {
         this.content = content;
@@ -30,12 +58,26 @@ class TextContent {
     }
 }
 
-public class StorageText implements StorageItem {
-    
-    private ArrayList <TextContent> content;
-    
-    public StorageText() {
+public class StorageText extends StorageItem {
+    // Singleton
+
+    private static StorageText instance = null;
+
+    private StorageText() {
         content = new ArrayList <> ();
+        out = System.out;
+    }
+
+    public static StorageText GetInstance() {
+        if (instance == null)
+            instance = new StorageText();
+        return instance;
+    }
+
+    protected void New(String[] args) {
+        StorageEntry entry = new TextContent();
+        entry.New();
+        content.add(entry);
     }
 
     public String Name() {
@@ -44,34 +86,5 @@ public class StorageText implements StorageItem {
 
     public String Description() {
         return "Module storing plain-text information.";
-    }
-
-    public void Load(String path) {
-        throw new Error("Feature not implemented!");
-    }
-
-    public void Unload(String path) {
-        throw new Error("Feature not implemented!");
-    }
-
-    public void Execute(String[] args) {
-        StringWorker stringworker = StringWorker.GetInstance();
-
-        try {
-            // If args == {} then exit.
-            if (args.length == 0)
-                throw new Exception();
-            if (args.length == 1) {
-                String s = args[0];
-                if (!stringworker.CheckEqual(args[0], "list"))
-                    throw new Exception();
-                System.out.println("Saved notes:\n");
-                for (int i = 0; i < content.size(); i++)
-                    System.out.println((i + 1) + ": \"" + content.get(i).GetTile() + "\"");
-            }
-            
-        } catch(Exception e) {
-            System.out.println("Usage: " + Name() + " [View / Edit / Delete] <Title>\n    List");
-        }
     }
 }

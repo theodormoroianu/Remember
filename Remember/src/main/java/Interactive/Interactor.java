@@ -51,8 +51,6 @@ public class Interactor {
         if (args.length == 0)
             return false;
 
-        StringWorker stringworker = StringWorker.GetInstance();
-
         args[0] = args[0].toLowerCase();
 
         switch(args[0]) {
@@ -67,7 +65,7 @@ public class Interactor {
         }
 
         for (StorageItem storage : storages) {
-            if (stringworker.CheckEqual(storage.Name(), args[0])) {
+            if (StringWorker.CheckEqual(storage.Name(), args[0])) {
                 storage.Execute(Arrays.copyOfRange(args, 1, args.length));
                 return false;
             }

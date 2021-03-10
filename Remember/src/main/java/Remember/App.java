@@ -15,7 +15,7 @@ public class App
     {
         Interactor interactor = Interactor.GetInstance();
         ArrayList<StorageItem> arr = new ArrayList<>();
-        arr.add(new StorageText());
+        arr.add(StorageText.GetInstance());
         interactor.Execute(arr);
     }
 }
