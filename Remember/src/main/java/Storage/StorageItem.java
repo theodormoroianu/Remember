@@ -11,17 +11,17 @@ import java.util.ArrayList;
  *  - Checklists
  */
 public interface StorageItem {
-    /**
-     * Loads the storage class from a file.
-     * @param string with the path of the file to read.
-     */
-    public void Load(String path);
+    // /**
+    //  * Loads the storage class from a file.
+    //  * @param string with the path of the file to read.
+    //  */
+    // public void Load(String path);
     
-    /**
-     * Writes the storage class to a file.
-     * @param string with the path of the file to read.
-     */
-    public void Unload(String path);
+    // /**
+    //  * Writes the storage class to a file.
+    //  * @param string with the path of the file to read.
+    //  */
+    // public void Unload(String path);
 
     /**
      * Executes a list of commands received from the command line.
