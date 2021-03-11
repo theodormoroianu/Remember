@@ -34,19 +34,19 @@ class ContactContent extends StorageEntry {
 }
 
 
-public class StorageContacts extends StorageItem {
-    private StorageContacts() { }
+public class StorageContact extends StorageItem {
+    private StorageContact() { }
 
-    static StorageContacts instance = null;
+    static StorageContact instance = null;
 
-    public static StorageContacts GetInstance() {
+    public static StorageContact GetInstance() {
         if (instance == null)
-            instance = new StorageContacts();
+            instance = new StorageContact();
         return instance;
     }
     
     public String Name() {
-        return "Contacts";
+        return "Contact";
     }
 
     public String Description() {

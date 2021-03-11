@@ -1,7 +1,5 @@
 package Worker;
 
-import java.util.regex.Pattern;
-
 /**
  * Singleton class able to perform various operations on strings.
  */
@@ -27,7 +25,7 @@ public class StringWorker {
      * @return trimmed string.
      */
     static public String RemoveDoubleSpaces(String s) {
-        return s.replaceAll("( +)", " ").trim();
+        return s.trim().replaceAll("( +)", " ").trim();
     }
 
     /**
@@ -35,18 +33,9 @@ public class StringWorker {
      * @return True if the strings are equal.
      */
     static public boolean CheckEqual(String a, String b) {
+        a = a.trim();
+        b = b.trim();
         return a.toLowerCase().equals(b.toLowerCase());
-    }
-
-    /**
-     * Checks if a string matches a given regex.
-     * If regex is empty then always match.
-     * @return Returns if the string matched the regex.
-     */
-    static public boolean MatchRegex(String str, String regex) {
-        if (str.equals(""))
-            str = ".*";
-        return Pattern.matches(regex, str);
     }
 
     /**

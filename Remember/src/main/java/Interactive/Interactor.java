@@ -36,7 +36,7 @@ public class Interactor {
         out.println("\nAvailable commands:");
         out.println("    * Exit               Exists Rɘmɘmbɘr.");
         out.println("    * Help               Displays this message.");
-        out.println("    * Clear               Clears the console.");
+        out.println("    * Clear              Clears the console.");
         out.println("\nAvailable modules:");
         for (StorageItem comp : storages)
             out.println(("    * " + comp.Name() + "                          ").substring(0, 25) + comp.Description());
@@ -78,7 +78,7 @@ public class Interactor {
     /**
      * Starts an interactive CLI interface.
      */
-    public void Execute(ArrayList <StorageItem> storages) {
+    public void Interact(ArrayList <StorageItem> storages) {
         this.storages = storages;
 
         out.println("Rɘmɘmbɘr 0.0.1 (8 March 2021)");
@@ -94,5 +94,14 @@ public class Interactor {
         }
 
         out.println("Leaving interactor ...");
+    }
+
+    /**
+     * Execute one command.
+     */
+    public void Execute(ArrayList <StorageItem> storages, String[] args) {
+        this.storages = storages;
+        
+        Parse(args);
     }
 }

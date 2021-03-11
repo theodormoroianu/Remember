@@ -143,6 +143,7 @@ public abstract class StorageItem {
         
         if (content.size() == 0) {
             out.println("No entries found!");
+            return;
         }
 
         for (StorageEntry elem : content)

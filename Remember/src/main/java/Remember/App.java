@@ -10,13 +10,22 @@ import java.util.ArrayList;
  */
 public class App 
 {
-    public static void main( String[] args )
+    static ArrayList<StorageItem> GetStorageItems()
     {
-        Interactor interactor = Interactor.GetInstance();
         ArrayList<StorageItem> arr = new ArrayList<>();
         arr.add(StorageText.GetInstance());
-        arr.add(StorageContacts.GetInstance());
-
-        interactor.Execute(arr);
+        arr.add(StorageContact.GetInstance());
+        arr.add(StorageURL.GetInstance());
+        arr.add(StorageToDo.GetInstance());
+        return arr;
+    }
+    public static void main(String[] args)
+    {
+        Interactor interactor = Interactor.GetInstance();
+        
+        if (args.length > 0)
+            interactor.Execute(GetStorageItems(), args);
+        else
+            interactor.Interact(GetStorageItems());
     }
 }

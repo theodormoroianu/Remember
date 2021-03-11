@@ -11,6 +11,11 @@ public class IOWorker {
 
     private static IOWorker instance = null;
 
+    public static void DeleteInstance() {
+        if (instance != null)
+            instance = null;
+    }
+
     public static IOWorker GetInstance() {
         if (instance == null)
             instance = new IOWorker();
