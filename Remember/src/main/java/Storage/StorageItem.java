@@ -16,6 +16,11 @@ import java.util.Arrays;
  */
 public abstract class StorageItem {
     
+    StorageItem() {
+        content = new ArrayList <> ();
+        out = System.out;
+    }
+
     protected PrintStream out;
     protected ArrayList <StorageEntry> content;
 
@@ -52,7 +57,7 @@ public abstract class StorageItem {
             else
                 throw new Exception(); // Unrecognized command        
         } catch(Exception e) {
-            System.out.println("Invalid command. Please use\"" + Name() + " Help\" for help."); 
+            System.out.println("Invalid command. Please use \"" + Name() + " Help\" for help."); 
         }
     }
 
@@ -60,13 +65,21 @@ public abstract class StorageItem {
      * Displays help message.
      */
     private void DisplayHelp() {
-        System.out.println("idk cv help");
+        System.out.println("Usage: " + Name() + " [COMMAND] <ARGS>");
+        System.out.println("Rɘmɘmbɘr " + Name() + " -- " + Description());
+        System.out.println("\nAvailable commands:");
+        System.out.println("    * " + Name() + " View   <NAME>");
+        System.out.println("    * " + Name() + " Delete <NAME>");
+        System.out.println("    * " + Name() + " Edit   <NAME>");
+        System.out.println("    * " + Name() + " New");
+        System.out.println("    * " + Name() + " List");
+        System.out.println("For more details, please check documentation.");
     }
 
     /**
      * Creates a new item.
      */
-    abstract protected void New(String[] args);
+    abstract protected void New(String[] args) throws Exception;
 
     /**
      * Finds an entry in the content.
@@ -101,7 +114,7 @@ public abstract class StorageItem {
      * Edits the item from content matching the argument.
      */
     private void Edit(String[] args) throws Exception {
-        StorageEntry entry = FindEntry(args);
+        StorageEntry entry = FindEntry(args); // TODO: not be able to have same title twice
 
         if (entry == null)
             out.println("No entry with the given name was found!");

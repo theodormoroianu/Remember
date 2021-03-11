@@ -1,8 +1,7 @@
 package Remember;
 
 import Interactive.Interactor;
-import Storage.StorageItem;
-import Storage.StorageText;
+import Storage.*;
 
 import java.util.ArrayList;
 
@@ -16,6 +15,8 @@ public class App
         Interactor interactor = Interactor.GetInstance();
         ArrayList<StorageItem> arr = new ArrayList<>();
         arr.add(StorageText.GetInstance());
+        arr.add(StorageContacts.GetInstance());
+
         interactor.Execute(arr);
     }
 }

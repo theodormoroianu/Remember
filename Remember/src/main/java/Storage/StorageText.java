@@ -2,32 +2,20 @@ package Storage;
 
 import java.util.ArrayList;
 
-import Worker.IOWorker;
-
-class TextContent implements StorageEntry {
+class TextContent extends StorageEntry {
     private String title;
     private String content;
 
     public TextContent() { }
 
-    public void Edit() {
-        System.out.println("Former title: " + title);
-        System.out.println("New title (leave blank to not modify): ");
-        String new_title = IOWorker.GetInstance().GetLine();
-        if (!new_title.isEmpty())
-            title = new_title; // TODO: not be able to have same title twice
-        System.out.println("Former content: " + content);
-        System.out.println("New content (leave blank to not modify): ");
-        String new_content = IOWorker.GetInstance().GetLine();
-        if (!new_content.isEmpty())
-            content = new_content;
+    public void Edit() throws Exception {
+        title = UpdateEntry(title, "Title");
+        content = UpdateEntry(content, "Content");
     }
 
-    public void New() {
-        System.out.print("Title: ");
-        title = IOWorker.GetInstance().GetLine();
-        System.out.print("Content: ");
-        content = IOWorker.GetInstance().GetLine();
+    public void New() throws Exception {
+        title = UpdateEntry("", "Title");
+        content = UpdateEntry("", "Content");
     }
 
     public void Show() {
@@ -44,18 +32,6 @@ class TextContent implements StorageEntry {
     public String GetTile() {
         return title;
     }
-
-    public void SetTitle(String title) {
-        this.title = title;
-    }
-
-    public String GetContent() {
-        return content;
-    }
-
-    public void SetContent(String content) {
-        this.content = content;
-    }
 }
 
 public class StorageText extends StorageItem {
@@ -63,10 +39,7 @@ public class StorageText extends StorageItem {
 
     private static StorageText instance = null;
 
-    private StorageText() {
-        content = new ArrayList <> ();
-        out = System.out;
-    }
+    private StorageText() { }
 
     public static StorageText GetInstance() {
         if (instance == null)
@@ -74,7 +47,9 @@ public class StorageText extends StorageItem {
         return instance;
     }
 
-    protected void New(String[] args) {
+    protected void New(String[] args) throws Exception {
+        if (args.length != 0)
+            throw new Exception();
         StorageEntry entry = new TextContent();
         entry.New();
         content.add(entry);

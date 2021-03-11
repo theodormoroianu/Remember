@@ -1,18 +1,34 @@
 package Storage;
 
+import Worker.*;
+
 /**
  * Interface used for storing data entries within the storage mediums.
  */
-public interface StorageEntry {
+public abstract class StorageEntry {
     // Returns the title of the entry.
-    public String GetTile();
+    public abstract String GetTile();
 
     // Displays the content of the entry.
-    public void Show();
+    public abstract void Show();
 
     // Prompts a modification of the entry.
-    public void Edit();
+    public abstract void Edit() throws Exception;
 
     // Creates a new entry.
-    public void New();
+    public abstract void New() throws Exception;
+
+    // Reads something from stdin.
+    protected String UpdateEntry(String old_value, String description) throws Exception {
+        if (old_value.length() != 0)
+            System.out.print(description + " [" + old_value + "]: ");
+        else
+            System.out.print(description + ": ");
+        String new_name = IOWorker.GetInstance().GetLine();
+        if (!new_name.isEmpty())
+            return new_name;
+        if (!old_value.isEmpty())
+            return old_value;
+        throw new Exception();
+    }
 }
