@@ -1,17 +1,8 @@
 # Remember
-CLI Application made in Java for saving short messages / memos
+CLI Application made in Java for saving notes, contacts, urls and checklists.
 
-# Proiect Java
+## Usage
 
-## Idea proiectului
+Remember can be used both as a standard CLI tool and as an interactive environment.
 
-Proiectul este axat pe salvarea informatiilor pentru un student.
-
-## Elemente salvabile
-
-Multimea elementelor salvate se imparte in urmatoarele categorii:
-1. Text
-2. Formula matematica
-3. URL
-4. Checklist
-5. Contacte
+Please use `remember Help` from the command line, or `Help` from CLI Interactive for a detailed list of instructions.
