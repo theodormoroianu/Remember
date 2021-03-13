@@ -7,6 +7,15 @@ class ToDoContent extends StorageEntry {
 
     public ToDoContent() { }
 
+    public ToDoContent(String name, String description, boolean done) {
+        this.name = name;
+        this.description = description;
+        this.done = done;
+    }
+
+    public StorageEntry Copy() {
+        return new ToDoContent(name, description, done);
+    }
     private void SetDone(String state) throws Exception {
         if (state.isEmpty())
             throw new Exception();
@@ -68,6 +77,7 @@ public class StorageToDo extends StorageItem {
             throw new Exception();
         StorageEntry entry = new ToDoContent();
         entry.New();
-        content.add(entry);
+        TryUpdateEntries(null, entry);
+        content.add(0, entry);
     }
 }

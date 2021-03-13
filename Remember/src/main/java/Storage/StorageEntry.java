@@ -29,6 +29,11 @@ public abstract class StorageEntry {
             return new_name;
         if (!old_value.isEmpty())
             return old_value;
-        throw new Exception();
+        throw new Exception("field \"" + description + "\" should not be empty");
     }
+
+    /**
+     * Returns a copy of the object.
+     */
+    public abstract StorageEntry Copy();
 }

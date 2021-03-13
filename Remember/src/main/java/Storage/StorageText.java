@@ -1,12 +1,19 @@
 package Storage;
 
-import java.util.ArrayList;
-
 class TextContent extends StorageEntry {
     private String title;
     private String content;
 
+    public TextContent(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public TextContent() { }
+
+    public StorageEntry Copy() {
+        return new TextContent(title, content);
+    }
 
     public void Edit() throws Exception {
         title = UpdateEntry(title, "Title");
@@ -21,12 +28,6 @@ class TextContent extends StorageEntry {
     public void Show() {
         System.out.println("Title: " + title);
         System.out.println("Content: " + content);
-    }
-
-
-    TextContent(String title, String content) {
-        this.content = content;
-        this.title = title;
     }
 
     public String GetTile() {
@@ -52,7 +53,8 @@ public class StorageText extends StorageItem {
             throw new Exception();
         StorageEntry entry = new TextContent();
         entry.New();
-        content.add(entry);
+        TryUpdateEntries(null, entry);
+        content.add(0, entry);
     }
 
     public String Name() {

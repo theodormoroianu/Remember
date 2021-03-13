@@ -39,6 +39,13 @@ public class StringWorker {
     }
 
     /**
+     * Returns standard version of a title.
+     */
+    static public String Standard(String a) {
+        return a.trim().toLowerCase();
+    }
+
+    /**
      * Joins a list of strings into a single string.
      * It adds spaces between the words.
      */

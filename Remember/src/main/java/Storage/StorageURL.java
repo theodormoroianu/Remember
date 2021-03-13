@@ -5,6 +5,15 @@ class URLContent extends StorageEntry {
     private String url;
 
     public URLContent() { }
+    
+    public URLContent(String name, String url) {
+        this.name = name;
+        this.url = url;
+    }
+
+    public StorageEntry Copy() {
+        return new URLContent(name, url);
+    }
 
     public void New() throws Exception {
         name = UpdateEntry("", "Name");
@@ -52,6 +61,7 @@ public class StorageURL extends StorageItem {
             throw new Exception();
         StorageEntry entry = new URLContent();
         entry.New();
-        content.add(entry);
+        TryUpdateEntries(null, entry);
+        content.add(0, entry);
     }
 }

@@ -5,7 +5,19 @@ class ContactContent extends StorageEntry {
     private String address, phone_nummber, email;
 
     public ContactContent() { }
-
+    public ContactContent(
+            String name, 
+            String address,
+            String phone_number,
+            String email) {
+        this.name = name;
+        this.address = address;
+        this.phone_nummber = phone_number;
+        this.email = email;
+    }
+    public StorageEntry Copy() {
+        return new ContactContent(name, address, phone_nummber, email);
+    }
     public void New() throws Exception {
         name = UpdateEntry("", "Name");
         address = UpdateEntry("Unknown", "Address");
@@ -58,6 +70,7 @@ public class StorageContact extends StorageItem {
             throw new Exception();
         StorageEntry entry = new ContactContent();
         entry.New();
-        content.add(entry);
+        TryUpdateEntries(null, entry);
+        content.add(0, entry);
     }
 }
