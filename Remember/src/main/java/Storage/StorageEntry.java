@@ -7,8 +7,13 @@ import Worker.*;
  */
 public abstract class StorageEntry {
     // Returns the title of the entry.
-    public abstract String GetTile();
+    public abstract String GetTitle();
 
+    // Returns the title to display.
+    public String GetPrintableTitle() {
+        return GetTitle();
+    }
+    
     // Displays the content of the entry.
     public abstract void Show();
 

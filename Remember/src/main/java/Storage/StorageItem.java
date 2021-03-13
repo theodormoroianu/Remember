@@ -106,7 +106,7 @@ public abstract class StorageItem {
         StorageEntry entry = null;
 
         for (StorageEntry s : content)
-            if (StringWorker.CheckEqual(s.GetTile(), title))
+            if (StringWorker.CheckEqual(s.GetTitle(), title))
                 entry = s;
 
         return entry;
@@ -135,7 +135,7 @@ public abstract class StorageItem {
         else {
             StorageEntry new_entry = entry.Copy();
             new_entry.Edit();
-            TryUpdateEntries(entry.GetTile(), new_entry);
+            TryUpdateEntries(entry.GetTitle(), new_entry);
             content.remove(entry);
             content.add(0, new_entry);
         }
@@ -150,7 +150,7 @@ public abstract class StorageItem {
         if (entry == null)
             out.println("No entry with the given name was found!");
         else {
-            TryUpdateEntries(entry.GetTile(), null);
+            TryUpdateEntries(entry.GetTitle(), null);
             content.remove(entry);
         }
     }
@@ -168,7 +168,7 @@ public abstract class StorageItem {
         }
 
         for (StorageEntry elem : content)
-            out.println(" * " + elem.GetTile());
+            out.println(" * " + elem.GetPrintableTitle());
         
         out.println("Found " + content.size() + " entries!");
     }
@@ -185,10 +185,10 @@ public abstract class StorageItem {
         }
 
         boolean ok = false;
-        if (last_title != null && StringWorker.CheckEqual(last_title, entry.GetTile()))
+        if (last_title != null && StringWorker.CheckEqual(last_title, entry.GetTitle()))
             ok = true;
         
-        if (!titles.contains(StringWorker.Standard(entry.GetTile())))
+        if (!titles.contains(StringWorker.Standard(entry.GetTitle())))
             ok = true;
         
         if (!ok)
@@ -197,7 +197,7 @@ public abstract class StorageItem {
         if (last_title != null)
             titles.remove(StringWorker.Standard(last_title));
         
-        titles.add(StringWorker.Standard(entry.GetTile()));
+        titles.add(StringWorker.Standard(entry.GetTitle()));
     }
 
     /**

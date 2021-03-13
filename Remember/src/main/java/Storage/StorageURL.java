@@ -31,7 +31,7 @@ class URLContent extends StorageEntry {
     }
 
 
-    public String GetTile() {
+    public String GetTitle() {
         return name;
     }
 }

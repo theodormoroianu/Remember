@@ -46,9 +46,13 @@ class ToDoContent extends StorageEntry {
         System.out.println("Done:          " + (done ? "Yes" : "No"));
     }
 
-
-    public String GetTile() {
+    @Override
+    public String GetPrintableTitle() {
         return "[" + (done ? "X" : " ") + "] " + name;
+    }
+
+    public String GetTitle() {
+        return name;
     }
 }
 

@@ -30,7 +30,7 @@ class TextContent extends StorageEntry {
         System.out.println("Content: " + content);
     }
 
-    public String GetTile() {
+    public String GetTitle() {
         return title;
     }
 }
