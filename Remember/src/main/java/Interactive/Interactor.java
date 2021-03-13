@@ -43,6 +43,12 @@ public class Interactor {
         out.println("For more help on a module, please use: [MODULE] help");
     }
 
+    private void DisplayCredits() {
+        out.println("Rɘmɘmbɘr -- Simple CLI tool for storing information.");
+        out.println("Author:     Theodor Moroianu");
+        out.println("Project:    Remember");
+        out.println("Course:     Advanced OOP");
+    }
     /**
      * Parses the arguments.
      * @return true if the interactor should close.
@@ -61,6 +67,9 @@ public class Interactor {
                 return false;
             case "clear":
                 IOWorker.GetInstance().ClearConsole();
+                return false;
+            case "credits":
+                DisplayCredits();
                 return false;
         }
 
