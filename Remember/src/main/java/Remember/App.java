@@ -20,7 +20,8 @@ public class App
         arr.add(StorageAttraction.GetInstance());
         arr.add(StorageMovie.GetInstance());
         arr.add(StorageMoney.GetInstance());
-        
+        arr.add(StorageDict.GetInstance());
+
         return arr;
     }
     public static void main(String[] args)

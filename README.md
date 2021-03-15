@@ -8,6 +8,7 @@ CLI Application made in Java for saving:
  * Places to visit
  * Movies to watch
  * Money spent on stuff
+ * Dictionary
  
 ## Usage
 
