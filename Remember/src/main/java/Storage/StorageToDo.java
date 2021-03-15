@@ -18,7 +18,7 @@ class ToDoContent extends StorageEntry {
     }
     private void SetDone(String state) throws Exception {
         if (state.isEmpty())
-            throw new Exception();
+            throw new Exception("item should be done or pending");
         char letter = state.charAt(0);
         if (letter == 'Y' || letter == 'y' || letter == '1' || letter == 'X' || letter == 'x')
             done = true;
@@ -34,8 +34,8 @@ class ToDoContent extends StorageEntry {
     }
 
     public void Edit() throws Exception {
-        name = UpdateEntry("", "Name");
-        description = UpdateEntry("", "Description");
+        name = UpdateEntry(name, "Name");
+        description = UpdateEntry(description, "Description");
         String str_done = UpdateEntry((done ? "Yes" : "No"), "Finished");
         SetDone(str_done);
     }

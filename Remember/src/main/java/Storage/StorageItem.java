@@ -22,11 +22,21 @@ public abstract class StorageItem {
         content = new ArrayList <> ();
         titles = new HashSet<>();
         out = System.out;
+        additional_commands = new ArrayList <> ();
     }
 
     protected PrintStream out;
     protected ArrayList <StorageEntry> content;
     protected Set <String> titles;
+    protected ArrayList <String> additional_commands;
+
+
+    /**
+     * Executes custom commands.
+     */
+    protected void CustomCommand(String command, String[] args) throws Exception {
+        throw new Exception();
+    }
 
     /**
      * Executes a list of commands received from the command line.
@@ -38,8 +48,10 @@ public abstract class StorageItem {
         // Throws an exception if something goes wrong.
         try {
             // No arguments provided.
-            if (args.length == 0)
-                throw new Exception();
+            if (args.length == 0) {
+                DisplayHelp();
+                return;
+            }
             
             // Command received.
             String s = args[0];
@@ -59,7 +71,7 @@ public abstract class StorageItem {
             else if (StringWorker.CheckEqual(s, "Help"))
                 DisplayHelp();
             else
-                throw new Exception(); // Unrecognized command        
+                CustomCommand(s, remaining_args);        
         } catch(Exception e) {
             if (e.getMessage() == null)
                 System.out.println("Invalid command. Please use \"" + Name() + " Help\" for help."); 
@@ -82,11 +94,14 @@ public abstract class StorageItem {
         System.out.println("Usage: " + Name() + " [COMMAND] <ARGS>");
         System.out.println("Rɘmɘmbɘr " + Name() + " -- " + Description());
         System.out.println("\nAvailable commands:");
-        System.out.println("    * " + Name() + " View   <NAME>");
-        System.out.println("    * " + Name() + " Delete <NAME>");
-        System.out.println("    * " + Name() + " Edit   <NAME>");
+        System.out.println("    * " + Name() + " View    <NAME>");
+        System.out.println("    * " + Name() + " Delete  <NAME>");
+        System.out.println("    * " + Name() + " Edit    <NAME>");
         System.out.println("    * " + Name() + " New");
         System.out.println("    * " + Name() + " List");
+        for (String s : additional_commands)
+            System.out.println("    * " + Name() + " " + s);
+            
         System.out.println("For more details, please check documentation.");
     }
 
@@ -98,7 +113,7 @@ public abstract class StorageItem {
     /**
      * Finds an entry in the content.
      */
-    StorageEntry FindEntry(String[] args) throws Exception {
+    protected StorageEntry FindEntry(String[] args) throws Exception {
         if (args.length == 0)
             throw new Exception();
 

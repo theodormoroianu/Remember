@@ -17,6 +17,10 @@ public class App
         arr.add(StorageContact.GetInstance());
         arr.add(StorageURL.GetInstance());
         arr.add(StorageToDo.GetInstance());
+        arr.add(StorageAttraction.GetInstance());
+        arr.add(StorageMovie.GetInstance());
+        arr.add(StorageMoney.GetInstance());
+        
         return arr;
     }
     public static void main(String[] args)
