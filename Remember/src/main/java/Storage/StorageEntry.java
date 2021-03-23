@@ -17,6 +17,12 @@ public abstract class StorageEntry {
     // Displays the content of the entry.
     public abstract void Show();
 
+    // Loads from a list.
+    public abstract void LoadFromArray(String[] data);
+
+    // Prints to a list.
+    public abstract String[] WriteToArray();
+    
     // Prompts a modification of the entry.
     public abstract void Edit() throws Exception;
 

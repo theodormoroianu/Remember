@@ -1,11 +1,11 @@
 package Interactive;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import Storage.StorageItem;
 import Worker.IOWorker;
 import Worker.StringWorker;
 import java.util.Arrays;
+import java.util.List;
 
 public class Interactor {
     
@@ -13,7 +13,7 @@ public class Interactor {
     PrintStream out;
 
     // storages passed to the interactor.
-    ArrayList <StorageItem> storages;
+    List <StorageItem> storages;
 
     private Interactor() {
         out = System.out;
@@ -87,7 +87,7 @@ public class Interactor {
     /**
      * Starts an interactive CLI interface.
      */
-    public void Interact(ArrayList <StorageItem> storages) {
+    public void Interact(List <StorageItem> storages) {
         this.storages = storages;
 
         out.println("Rɘmɘmbɘr 0.0.1 (8 March 2021)");
@@ -108,7 +108,7 @@ public class Interactor {
     /**
      * Execute one command.
      */
-    public void Execute(ArrayList <StorageItem> storages, String[] args) {
+    public void Execute(List <StorageItem> storages, String[] args) {
         this.storages = storages;
         
         Parse(args);

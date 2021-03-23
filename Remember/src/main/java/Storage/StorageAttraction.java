@@ -1,5 +1,7 @@
 package Storage;
 
+import java.util.List;
+
 class AttractionContent extends StorageEntry {
     private String name;
     private String description;
@@ -15,6 +17,16 @@ class AttractionContent extends StorageEntry {
 
     public StorageEntry Copy() {
         return new AttractionContent(name, description, price);
+    }
+    
+    public void LoadFromArray(String[] data) {
+        name = data[0];
+        description = data[1];
+        price = data[2];
+    }
+
+    public String[] WriteToArray() {
+        return new String[] { name, description, price };
     }
 
     public void New() throws Exception {
@@ -72,5 +84,13 @@ public class StorageAttraction extends StorageItem {
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+    }
+    
+    public void LoadFromArray(List<String[]> data) {
+        for (String[] descr : data) {
+            StorageEntry entry = new AttractionContent();
+            entry.LoadFromArray(descr);
+            content.add(0, entry);
+        }
     }
 }

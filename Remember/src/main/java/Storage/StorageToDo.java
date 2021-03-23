@@ -1,5 +1,7 @@
 package Storage;
 
+import java.util.List;
+
 class ToDoContent extends StorageEntry {
     private String name;
     private String description;
@@ -16,6 +18,17 @@ class ToDoContent extends StorageEntry {
     public StorageEntry Copy() {
         return new ToDoContent(name, description, done);
     }
+        
+    public void LoadFromArray(String[] data) {
+        name = data[0];
+        description = data[1];
+        done = Boolean.parseBoolean(data[2]);
+    }
+
+    public String[] WriteToArray() {
+        return new String[] { name, description, String.valueOf(done) };
+    }
+
     private void SetDone(String state) throws Exception {
         if (state.isEmpty())
             throw new Exception("item should be done or pending");
@@ -83,5 +96,13 @@ public class StorageToDo extends StorageItem {
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+    }
+
+    public void LoadFromArray(List<String[]> data) {
+        for (String[] descr : data) {
+            StorageEntry entry = new ToDoContent();
+            entry.LoadFromArray(descr);
+            content.add(0, entry);
+        }
     }
 }

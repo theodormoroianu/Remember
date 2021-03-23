@@ -1,5 +1,7 @@
 package Storage;
 
+import java.util.List;
+
 class TextContent extends StorageEntry {
     private String title;
     private String content;
@@ -13,6 +15,15 @@ class TextContent extends StorageEntry {
 
     public StorageEntry Copy() {
         return new TextContent(title, content);
+    }
+    
+    public void LoadFromArray(String[] data) {
+        title = data[0];
+        content = data[1];
+    }
+
+    public String[] WriteToArray() {
+        return new String[] { title, content };
     }
 
     public void Edit() throws Exception {
@@ -63,5 +74,13 @@ public class StorageText extends StorageItem {
 
     public String Description() {
         return "Module storing plain-text information.";
+    }
+    
+    public void LoadFromArray(List<String[]> data) {
+        for (String[] descr : data) {
+            StorageEntry entry = new TextContent();
+            entry.LoadFromArray(descr);
+            content.add(0, entry);
+        }
     }
 }

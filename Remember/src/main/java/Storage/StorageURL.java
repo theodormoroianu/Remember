@@ -1,5 +1,7 @@
 package Storage;
 
+import java.util.List;
+
 class URLContent extends StorageEntry {
     private String name;
     private String url;
@@ -13,6 +15,15 @@ class URLContent extends StorageEntry {
 
     public StorageEntry Copy() {
         return new URLContent(name, url);
+    }
+    
+    public void LoadFromArray(String[] data) {
+        name = data[0];
+        url = data[1];
+    }
+
+    public String[] WriteToArray() {
+        return new String[] { name, url };
     }
 
     public void New() throws Exception {
@@ -63,5 +74,13 @@ public class StorageURL extends StorageItem {
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+    }
+    
+    public void LoadFromArray(List<String[]> data) {
+        for (String[] descr : data) {
+            StorageEntry entry = new URLContent();
+            entry.LoadFromArray(descr);
+            content.add(0, entry);
+        }
     }
 }

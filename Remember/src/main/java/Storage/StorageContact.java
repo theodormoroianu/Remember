@@ -1,10 +1,13 @@
 package Storage;
 
+import java.util.List;
+
 class ContactContent extends StorageEntry {
     private String name;
     private String address, phone_nummber, email;
 
     public ContactContent() { }
+
     public ContactContent(
             String name, 
             String address,
@@ -15,9 +18,22 @@ class ContactContent extends StorageEntry {
         this.phone_nummber = phone_number;
         this.email = email;
     }
+
     public StorageEntry Copy() {
         return new ContactContent(name, address, phone_nummber, email);
     }
+        
+    public void LoadFromArray(String[] data) {
+        name = data[0];
+        address = data[1];
+        phone_nummber = data[2];
+        email = data[3];
+    }
+
+    public String[] WriteToArray() {
+        return new String[] { name, address, phone_nummber, email };
+    }
+
     public void New() throws Exception {
         name = UpdateEntry("", "Name");
         address = UpdateEntry("Unknown", "Address");
@@ -38,7 +54,6 @@ class ContactContent extends StorageEntry {
         System.out.println("Phone Number: " + phone_nummber);
         System.out.println("Email:        " + email);
     }
-
 
     public String GetTitle() {
         return name;
@@ -72,5 +87,13 @@ public class StorageContact extends StorageItem {
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+    }
+
+    public void LoadFromArray(List<String[]> data) {
+        for (String[] descr : data) {
+            StorageEntry entry = new ContactContent();
+            entry.LoadFromArray(descr);
+            content.add(0, entry);
+        }
     }
 }

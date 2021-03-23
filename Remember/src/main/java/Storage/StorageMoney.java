@@ -1,5 +1,7 @@
 package Storage;
 
+import java.util.List;
+
 import Worker.StringWorker;
 
 class MoneyContent extends StorageEntry {
@@ -15,6 +17,17 @@ class MoneyContent extends StorageEntry {
         this.description = description;
         this.sum = sum;
         this.unit = unit;
+    }   
+
+    public void LoadFromArray(String[] data) {
+        name = data[0];
+        description = data[1];
+        sum = Double.parseDouble(data[2]);
+        unit = data[3];
+    }
+
+    public String[] WriteToArray() {
+        return new String[] { name, description, String.valueOf(sum), unit };
     }
 
     public StorageEntry Copy() {
@@ -127,5 +140,13 @@ public class StorageMoney extends StorageItem {
             Pay(args);
         else
             throw new Exception();
+    }
+
+    public void LoadFromArray(List<String[]> data) {
+        for (String[] descr : data) {
+            StorageEntry entry = new MoneyContent();
+            entry.LoadFromArray(descr);
+            content.add(0, entry);
+        }
     }
 }

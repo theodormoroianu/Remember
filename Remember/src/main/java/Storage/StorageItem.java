@@ -6,6 +6,7 @@ import Worker.StringWorker;
 import java.util.Set;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Abstract class implementing a behaviour we need in
@@ -109,6 +110,22 @@ public abstract class StorageItem {
      * Creates a new item.
      */
     abstract protected void New(String[] args) throws Exception;
+
+    /**
+     * Loads data from an array of lists.
+     */
+    abstract public void LoadFromArray(List<String[]> data);
+
+    /**
+     * Writes data to an array of lists.
+     */
+    public List<String[]> WriteToArray() {
+        List<String[]> data = new ArrayList<>();
+        for (StorageEntry e : content) {
+            data.add(e.WriteToArray());
+        }
+        return data;
+    }
 
     /**
      * Finds an entry in the content.
