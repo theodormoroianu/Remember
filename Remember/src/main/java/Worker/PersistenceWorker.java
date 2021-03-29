@@ -32,42 +32,37 @@ public class PersistenceWorker {
     }
 
     public void SaveToMemory() {
+        AuditWorker.GetInstance().Log("Saving items to memory");
         for (StorageItem item : ItemsWorker.GetInstance().GetStorageItems()) {
-            try {
-                Writer writer = Files.newBufferedWriter(
-                    Paths.get(GetFolderPath() + item.Name() + ".csv")
-                );
+            try (Writer writer = Files.newBufferedWriter(
+                    Paths.get(GetFolderPath() + item.Name() + ".csv"))) {
 
                 CSVWriter csvwriter = new CSVWriter(writer);
                 csvwriter.writeAll(item.WriteToArray());
                 csvwriter.close();
-                writer.close();
             }
             catch (Exception e) {
-                // System.out.println("Unable to save item " + item.Name() + " to memory!");
-                // e.printStackTrace();
+                AuditWorker.GetInstance().Log("Received error " + e.getMessage()
+                        + "when saving csvs to memory");  
             }
         }
     }
 
     public void LoadFromMemory() {
+        AuditWorker.GetInstance().Log("Loading items from memory");
         for (StorageItem item : ItemsWorker.GetInstance().GetStorageItems()) {
-            try {
-                Reader reader = Files.newBufferedReader(
-                    Paths.get(GetFolderPath() + item.Name() + ".csv")
-                );
-
+            try (Reader reader = Files.newBufferedReader(
+                    Paths.get(GetFolderPath() + item.Name() + ".csv"))) {
                 CSVReader csvreader = new CSVReader(reader);
                 List<String[]> data = csvreader.readAll();
 
                 item.LoadFromArray(data);
 
                 csvreader.close();
-                reader.close();
             }
             catch (Exception e) {
-                // System.out.println("Unable to load item " + item.Name() + " to memory!");
-                // e.printStackTrace();
+                AuditWorker.GetInstance().Log("Received error " + e.getMessage()
+                        + "when saving csvs to memory!");
             }
         }
     }

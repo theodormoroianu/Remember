@@ -2,6 +2,8 @@ package Storage;
 
 import java.util.ArrayList;
 import java.io.PrintStream;
+
+import Worker.AuditWorker;
 import Worker.StringWorker;
 import java.util.Set;
 import java.util.Arrays;
@@ -45,6 +47,12 @@ public abstract class StorageItem {
      */
     public void Execute(String[] args) {
         
+        String total_args = "";
+        for (String s : args)
+            total_args = total_args + " " + s;
+        AuditWorker.GetInstance().Log("Executing commands \"" + total_args
+                    + "\" in module " + Name() + "!");
+
         // Tries to parse the arguments.
         // Throws an exception if something goes wrong.
         try {

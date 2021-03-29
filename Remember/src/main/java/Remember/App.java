@@ -10,15 +10,19 @@ public class App
 {
     public static void main(String[] args)
     {
+        AuditWorker.GetInstance().Log("Starting application");
         PersistenceWorker.GetInstance().LoadFromMemory();
 
         Interactor interactor = Interactor.GetInstance();
         
-        if (args.length > 0)
+        if (args.length > 0) {
+            AuditWorker.GetInstance().Log("Detected arguments. Executing arguments.");
             interactor.Execute(ItemsWorker.GetInstance().GetStorageItems(), args);
-        else
+        }
+        else {
+            AuditWorker.GetInstance().Log("No arguments detected. Starting in interactive mode.");
             interactor.Interact(ItemsWorker.GetInstance().GetStorageItems());
-
+        }
         PersistenceWorker.GetInstance().SaveToMemory();
     }
 }

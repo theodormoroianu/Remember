@@ -2,6 +2,7 @@ package Interactive;
 
 import java.io.PrintStream;
 import Storage.StorageItem;
+import Worker.AuditWorker;
 import Worker.IOWorker;
 import Worker.StringWorker;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class Interactor {
     }
 
     private void DisplayHelp() {
+        AuditWorker.GetInstance().Log("Displaying help menu.");
         out.println("Usage: Command [ARGS | MODULE]... [OBJ]...");
         out.println("Rɘmɘmbɘr -- Simple CLI tool for storing information.");
         out.println("\nAvailable commands:");
@@ -44,6 +46,7 @@ public class Interactor {
     }
 
     private void DisplayCredits() {
+        AuditWorker.GetInstance().Log("Displaying credits menu.");
         out.println("Rɘmɘmbɘr -- Simple CLI tool for storing information.");
         out.println("Author:     Theodor Moroianu");
         out.println("Project:    Remember");
@@ -58,6 +61,7 @@ public class Interactor {
             return false;
 
         args[0] = args[0].toLowerCase();
+        AuditWorker.GetInstance().Log("Received command \"" + args[0] + "\".");
 
         switch(args[0]) {
             case "exit":
@@ -80,6 +84,7 @@ public class Interactor {
             }
         }
 
+        AuditWorker.GetInstance().Log("Command \"" + args[0] + "\" was not understood!");
         out.println("ERROR: Command was not understood.\nPlease use \"Help\" for a list of available commands.");
         return false;
     }
