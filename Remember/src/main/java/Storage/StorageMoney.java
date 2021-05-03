@@ -2,6 +2,7 @@ package Storage;
 
 import java.util.List;
 
+import Worker.PersistenceWorker;
 import Worker.StringWorker;
 
 class MoneyContent extends StorageEntry {
@@ -69,8 +70,12 @@ class MoneyContent extends StorageEntry {
         diff = diff.replaceAll(" ", "");
 
         try {
+            MoneyContent old_me = (MoneyContent)Copy();
             double delta = Double.parseDouble(diff);
             sum += delta;
+            PersistenceWorker
+                .GetInstance()
+                .UpdateEntry(StorageMoney.GetInstance(), old_me, this);
         }
         catch (Exception e) {
             throw new Exception("update given isn't a number");
@@ -96,7 +101,7 @@ class MoneyContent extends StorageEntry {
 
 public class StorageMoney extends StorageItem {
     private StorageMoney() {
-        additional_commands.add("Pay   <NAME>");
+        additional_commands.add("Pay     <NAME>");
     }
 
     static StorageMoney instance = null;
@@ -115,13 +120,14 @@ public class StorageMoney extends StorageItem {
         return "Module storing sums of money";
     }
 
-    protected void New(String[] args) throws Exception {
+    protected StorageEntry New(String[] args) throws Exception {
         if (args.length != 0)
             throw new Exception();
         StorageEntry entry = new MoneyContent();
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+        return entry;
     }
 
     private void Pay(String[] args) throws Exception {

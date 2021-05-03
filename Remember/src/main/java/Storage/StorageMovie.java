@@ -100,13 +100,14 @@ public class StorageMovie extends StorageItem {
         return "Module storing movies to watch";
     }
 
-    protected void New(String[] args) throws Exception {
+    protected StorageEntry New(String[] args) throws Exception {
         if (args.length != 0)
             throw new Exception();
         StorageEntry entry = new MovieContent();
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+        return entry;
     }
     
     public void LoadFromArray(List<String[]> data) {

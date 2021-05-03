@@ -66,13 +66,14 @@ public class StorageDict extends StorageItem {
         return "Module storing dictionary entries";
     }
 
-    protected void New(String[] args) throws Exception {
+    protected StorageEntry New(String[] args) throws Exception {
         if (args.length != 0)
             throw new Exception();
         StorageEntry entry = new DictContent();
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+        return entry;
     }
 
     public void LoadFromArray(List<String[]> data) {

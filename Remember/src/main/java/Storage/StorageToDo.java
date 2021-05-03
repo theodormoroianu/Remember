@@ -89,13 +89,14 @@ public class StorageToDo extends StorageItem {
         return "Module storing todos";
     }
 
-    protected void New(String[] args) throws Exception {
+    protected StorageEntry New(String[] args) throws Exception {
         if (args.length != 0)
             throw new Exception();
         StorageEntry entry = new ToDoContent();
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+        return entry;
     }
 
     public void LoadFromArray(List<String[]> data) {

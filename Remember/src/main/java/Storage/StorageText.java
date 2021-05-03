@@ -59,13 +59,14 @@ public class StorageText extends StorageItem {
         return instance;
     }
 
-    protected void New(String[] args) throws Exception {
+    protected StorageEntry New(String[] args) throws Exception {
         if (args.length != 0)
             throw new Exception();
         StorageEntry entry = new TextContent();
         entry.New();
         TryUpdateEntries(null, entry);
         content.add(0, entry);
+        return entry;
     }
 
     public String Name() {

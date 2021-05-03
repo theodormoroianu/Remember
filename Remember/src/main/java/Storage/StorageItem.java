@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.io.PrintStream;
 
 import Worker.AuditWorker;
+import Worker.PersistenceWorker;
 import Worker.StringWorker;
 import java.util.Set;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ public abstract class StorageItem {
             else if (StringWorker.CheckEqual(s, "Edit"))
                 Edit(remaining_args);
             else if (StringWorker.CheckEqual(s, "New"))
-                New(remaining_args);
+                NewEntry(remaining_args);
             else if (StringWorker.CheckEqual(s, "Help"))
                 DisplayHelp();
             else
@@ -115,9 +116,17 @@ public abstract class StorageItem {
     }
 
     /**
+     * Creates an entry and saves it to memory.
+     */
+    private void NewEntry(String[] args) throws Exception {
+        StorageEntry entry = New(args);
+        PersistenceWorker.GetInstance().CreateEntry(this, entry);
+    }
+
+    /**
      * Creates a new item.
      */
-    abstract protected void New(String[] args) throws Exception;
+    abstract protected StorageEntry New(String[] args) throws Exception;
 
     /**
      * Loads data from an array of lists.
@@ -178,6 +187,7 @@ public abstract class StorageItem {
             TryUpdateEntries(entry.GetTitle(), new_entry);
             content.remove(entry);
             content.add(0, new_entry);
+            PersistenceWorker.GetInstance().UpdateEntry(this, entry, new_entry);
         }
     }
 
@@ -192,6 +202,7 @@ public abstract class StorageItem {
         else {
             TryUpdateEntries(entry.GetTitle(), null);
             content.remove(entry);
+            PersistenceWorker.GetInstance().DeleteEntry(this, entry);
         }
     }
 

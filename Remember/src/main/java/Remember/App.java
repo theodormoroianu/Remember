@@ -11,7 +11,7 @@ public class App
     public static void main(String[] args)
     {
         AuditWorker.GetInstance().Log("Starting application");
-        PersistenceWorker.GetInstance().LoadFromMemory();
+        PersistenceWorker.GetInstance().ReadAllFromMemory();
 
         Interactor interactor = Interactor.GetInstance();
         
@@ -23,6 +23,5 @@ public class App
             AuditWorker.GetInstance().Log("No arguments detected. Starting in interactive mode.");
             interactor.Interact(ItemsWorker.GetInstance().GetStorageItems());
         }
-        PersistenceWorker.GetInstance().SaveToMemory();
     }
 }
