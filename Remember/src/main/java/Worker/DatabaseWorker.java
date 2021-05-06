@@ -51,7 +51,7 @@ public class DatabaseWorker implements StorageWorker {
                 }
         }
         catch (Exception e) {
-            System.out.println("Unable to initialize tables!");
+            AuditWorker.GetInstance().Log("Unable to initialize tables!");
         }
     }
 
@@ -85,7 +85,7 @@ public class DatabaseWorker implements StorageWorker {
             }
         }
         catch (Exception e) {
-            System.out.println("Unable to initialize tables!");
+            AuditWorker.GetInstance().Log("Unable to retreive data!");
         }
     }
 
@@ -110,7 +110,7 @@ public class DatabaseWorker implements StorageWorker {
             statement.executeUpdate(query);
         }
         catch (Exception e) {
-            System.out.println("Unable to initialize tables!");
+            AuditWorker.GetInstance().Log("Unable to update entry in " + item.Name() + "!");
         }
     }
 
@@ -122,7 +122,7 @@ public class DatabaseWorker implements StorageWorker {
             statement.executeUpdate(query);
         }
         catch (Exception e) {
-            System.out.println("Unable to initialize tables!");
+            AuditWorker.GetInstance().Log("Unable to delete entry in " + item.Name() + "!");
         }
     }
 
@@ -135,7 +135,7 @@ public class DatabaseWorker implements StorageWorker {
             statement.executeUpdate(query);
         }
         catch (Exception e) {
-            System.out.println("Unable to initialize tables!");
+            AuditWorker.GetInstance().Log("Unable to create entry in " + item.Name() + "!");
         }
     }
 }

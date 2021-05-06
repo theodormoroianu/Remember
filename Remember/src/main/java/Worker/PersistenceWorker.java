@@ -6,6 +6,6 @@ public class PersistenceWorker {
     }
 
     public static StorageWorker GetInstance() {
-        return DatabaseWorker.GetInstance();
+        return CSVWorker.GetInstance();
     }
 }
