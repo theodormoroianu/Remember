@@ -67,7 +67,7 @@ public class CSVWorker implements StorageWorker {
             }
             catch (Exception e) {
                 AuditWorker.GetInstance().Log("Received error " + e.getMessage()
-                        + " when saving csvs to memory!");
+                        + " when loading csvs from memory!");
             }
         }
     }
